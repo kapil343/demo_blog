@@ -1,0 +1,11 @@
+<div class="w-50 shadow mt-1 rounded border p-4 bg-secondary">
+  <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+    <p>
+      <% form.label :body %><br>
+      <%= form.text_area :body %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+</div>

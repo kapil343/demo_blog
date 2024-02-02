@@ -1,0 +1,35 @@
+<div class="container-fluid w-50 shadow mt-1 rounded border p-4 bg-secondary">
+  <%= form_with model: article do |form| %>
+    <% if article&.errors&.any? %>
+      <div id="error_explanation">
+        <h2 class="text-light "><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+        <ul>
+          <% article.errors.full_messages.each do |msg| %>
+            <li class="text-light "><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-outline mb-4 ">
+      <%= form.label :title, class: "form-label" %>
+      <%= form.text_field :title, required: true, autofocus: true, autocomplete: "name", class: "form-control" %>
+    </div>
+
+    <div class="form-outline mb-4 ">
+      <%= form.label :body, class: "form-label" %>
+      <%= form.text_field :body, required: true, autofocus: true, autocomplete: "name", class: "form-control" %>
+    </div>
+
+    <% if current_admin_user %>
+      <div class="form-outline mb-4 ">
+        <%= form.select :user_id,options_for_select(User.with_role(:author).map { |u| [u.email, u.id] }), class: "form-control" %>
+      </div>
+    <% end %>
+
+    <div class="form-outline mb-4 ">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,16 @@
+<p class="m-1 p-1"><strong>Title: </strong><%= @article.title %></p>
+<p class="m-1 p-1"><strong>Body: </strong><%= @article.body %></p>
+
+<% if @article.user == current_user and current_user.has_role? :author %>
+  <%= link_to "Edit", edit_article_path(@article), class: 'btn btn-sm btn-primary' %>
+  <%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: 'are you sure!!'
+  }, class: 'btn btn-sm btn-primary' %>
+<% end %>
+
+<h2>Comments</h2>
+<%= render 'comments/comment' %>
+
+<h2>Add a comment:</h2>
+<%= render 'comments/form' %>

@@ -1,0 +1,12 @@
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+    <% if comment.user == current_user %>
+      <%= link_to "Destroy", article_comment_path(@article, comment), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: 'are you sure!!'
+                    }, class: 'btn btn-sm btn-primary' %>
+    <% end %>
+  </p>
+<% end %>
